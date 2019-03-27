@@ -1,28 +1,34 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Faker from 'faker'
-import CommentDetail from './CommentDetail'
-import ApprovalCard from './ApprovalCard';
-import Message from './Message';
 
-const App = () => {
-  return (
-    <div className="ui container comments">
-      <Message header="Changes in Service" content="We have updated our policy read it!" />
-      <ApprovalCard>
-        <CommentDetail author="Sam" timeAgo="Today at 04:55PM" avatar={Faker.image.avatar()} content={Faker.lorem.sentence()} />
-      </ApprovalCard>
-      <ApprovalCard>
-        <CommentDetail author="Alex" timeAgo="Today at 02:00AM" avatar={Faker.image.avatar()} content={Faker.lorem.sentence()} />
-      </ApprovalCard>
-      <ApprovalCard>
-        <CommentDetail author="Jane" timeAgo="Yesterday at 05:00PM" avatar={Faker.image.avatar()} content={Faker.lorem.sentence()} />
-      </ApprovalCard>
-    </div>
-  )
+class App extends React.Component {  
+  constructor(props) {
+    super(props);
+
+    this.state = { lat: null, errMessage: '' }
+
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({ lat: position.coords.latitude })
+      },
+      err => {
+        this.setState({ errMessage: err.message })
+      }
+    )
+  }
+  
+  render() {
+    if(this.state.errMessage && !this.state.lat) {
+      return <h2>Error: {this.state.errMessage}</h2>
+    }
+    if(!this.state.errMessage && this.state.lat) {
+      return <h2>Latitude: {this.state.lat}</h2>
+    }
+    return <h2>Latitude: Loading...</h2>
+  }
 }
 
 ReactDOM.render(
   <App />,
   document.querySelector('#root')
-)
+);
