@@ -1,27 +1,43 @@
 import React from 'react'
-import unsplash from '../api/unsplash'
 import SearchBar from './SearchBar'
-import ImageList from './ImageList'
+import youtube from '../apis/youtube'
+import VideoList from './VideoList'
+import VideoDetail from './VideoDetail'
 
 class App extends React.Component {
-  state = { images: [], load: 'none' }
-  onSearchSubmit = async term => {
-    this.setState({ load: 'block' })
-    const response = await unsplash.get('/search/photos', {
-      params: {query: term}
-    })
-    this.setState({ images: response.data.results, load: 'none' })
+  state = {videos: [], selectedVideo: null}
+
+  componentDidMount() {
+    this.onTermSubmit('planes')
   }
+  
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        q: term
+      }
+    })
+
+    this.setState({
+      videos: response.data.items,
+      selectedVideo: response.data.items[0]
+    })
+  }
+  onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video })
+  } 
   render() {
     return (
-        <div className="ui container" style={{ marginTop: '10px' }}>
-          <SearchBar onSubmit={this.onSearchSubmit} />
-          <div style={{ display : this.state.load }} className="ui active dimmer">
-            <div className="ui loader"></div>
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />
+        <div className="ui grid">
+          <div className="ui row">
+            <div className="eleven wide column"><VideoDetail video={this.state.selectedVideo} /></div>
+            <div className="five wide column"><VideoList videos={this.state.videos} onVideoSelect={this.onVideoSelect} /></div>
           </div>
-          <ImageList images={this.state.images} />
         </div>
-      )
+      </div>
+    )
   }
 }
 
