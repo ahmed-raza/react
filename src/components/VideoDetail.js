@@ -31,7 +31,8 @@ const VideoDetail = ({ video }) => {
       </div>
       <div className="ui segment">
         <h4 className="ui header">{video.snippet.title}</h4>
-        <em>{video.snippet.channelTitle}</em> <strong>{formatDate(video.snippet.publishedAt)}</strong>
+        <strong>{video.snippet.channelTitle}</strong>
+        <div><em>{formatDate(video.snippet.publishedAt)}</em></div>
         <p>{video.snippet.description}</p>
       </div>
     </div>
