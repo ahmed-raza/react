@@ -1,8 +1,15 @@
+import React from "react";
 import "./Card.css";
 
-const Card = (props) => {
-  const classes = "card " + props.className;
-  return <div className={classes}>{props.children}</div>;
-};
+class Card extends React.Component {
+  constructor(props) {
+    super(props);
+    this.classes = "card " + props.className;
+  }
+
+  render() {
+    return <div className={this.classes}>{this.props.children}</div>;
+  }
+}
 
 export default Card;

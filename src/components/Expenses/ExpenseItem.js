@@ -1,26 +1,33 @@
-import React, { useState } from "react";
-
+import React from "react";
 import ExpenseDate from "./ExpenseDate";
 import Card from "../UI/Card";
 import "./ExpenseItem.css";
 
-const ExpenseItem = (props) => {
-  const [title, setTitle] = useState(props.title);
+class ExpenseItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { title: props.title };
+    this.clickHandler = this.clickHandler.bind(this);
+  }
 
-  const clickHandler = () => {
-    setTitle("Updated!!");
+  clickHandler = () => {
+    this.setState({
+      title: "Updated!!",
+    });
   };
 
-  return (
-    <Card className="expense-item">
-      <ExpenseDate date={props.date}></ExpenseDate>
-      <div className="expense-item__description">
-        <h2>{title}</h2>
-        <div className="expense-item__price">${props.price}</div>
-        <button onClick={clickHandler}>Change Title</button>
-      </div>
-    </Card>
-  );
-};
+  render() {
+    return (
+      <Card className="expense-item">
+        <ExpenseDate date={this.props.date}></ExpenseDate>
+        <div className="expense-item__description">
+          <h2>{this.state.title}</h2>
+          <div className="expense-item__price">${this.props.price}</div>
+          <button onClick={this.clickHandler}>Change Title</button>
+        </div>
+      </Card>
+    );
+  }
+}
 
 export default ExpenseItem;
