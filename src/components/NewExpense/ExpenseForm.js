@@ -46,6 +46,8 @@ class ExpenseForm extends React.Component {
       enteredAmount: "",
       enteredDate: "",
     });
+
+    this.props.onCancel();
   }
 
   render() {
@@ -82,6 +84,9 @@ class ExpenseForm extends React.Component {
           </div>
         </div>
         <div className="new-expense__actions">
+          <button type="button" onClick={this.props.onCancel}>
+            Cancel
+          </button>
           <button type="submit"> Add Expense</button>
         </div>
       </form>
