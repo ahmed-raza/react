@@ -8,39 +8,29 @@ import "./Expenses.css";
 class Expenses extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      filtered: false,
-      selectedFilterYear: new Date().getFullYear().toString(),
-      filteredItems: this.props.items,
-    };
+    this.state = { selectedFilterYear: new Date().getFullYear().toString() };
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
   }
 
   filterChangeHandler(selectedYear) {
-    let filteredResults = this.props.items.filter((expense) => {
-      return expense.date.getFullYear().toString() === selectedYear;
-    });
-
-    this.setState((prevState) => ({
-      filtered: true,
-      selectedFilterYear: selectedYear,
-      filteredItems: filteredResults,
-    }));
+    this.setState({ selectedFilterYear: selectedYear });
   }
 
   render() {
+    const filteredItems = this.props.items.filter((expense) => {
+      return (
+        expense.date.getFullYear().toString() === this.state.selectedFilterYear
+      );
+    });
+
     return (
       <Card className="expenses">
         <ExpensesFilter
           onChangeFilterYear={this.filterChangeHandler}
           defaultValue={this.state.selectedFilterYear}
         />
-        <ExpensesChart expenses={this.state.filteredItems} />
-        <ExpensesList
-          items={
-            !this.state.filtered ? this.props.items : this.state.filteredItems
-          }
-        />
+        <ExpensesChart expenses={filteredItems} />
+        <ExpensesList items={filteredItems} />
       </Card>
     );
   }

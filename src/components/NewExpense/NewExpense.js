@@ -5,7 +5,7 @@ import React from "react";
 class NewExpense extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showForm: false };
+    this.state = { showForm: true };
     this.formHandler = this.formHandler.bind(this);
   }
 
