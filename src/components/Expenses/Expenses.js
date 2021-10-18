@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../UI/Card";
 import ExpensesList from "./ExpensesList";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesChart from "./ExpensesChart";
 import "./Expenses.css";
 
 class Expenses extends React.Component {
@@ -34,6 +35,7 @@ class Expenses extends React.Component {
           onChangeFilterYear={this.filterChangeHandler}
           defaultValue={this.state.selectedFilterYear}
         />
+        <ExpensesChart expenses={this.state.filteredItems} />
         <ExpensesList
           items={
             !this.state.filtered ? this.props.items : this.state.filteredItems
