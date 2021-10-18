@@ -19,7 +19,7 @@ const DUMMY_EXPENSES = [
     id: "e3",
     title: "Grocery",
     price: "321.67",
-    date: new Date(2021, 8, 24),
+    date: new Date(2020, 8, 24),
   },
 ];
 
