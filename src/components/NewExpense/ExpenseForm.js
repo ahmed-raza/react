@@ -4,11 +4,7 @@ import "./ExpenseForm.css";
 class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      enteredTitle: "Book",
-      enteredAmount: "79.99",
-      enteredDate: "2021-10-07",
-    };
+    this.state = { enteredTitle: "", enteredAmount: "", enteredDate: "" };
 
     this.titleChangeHandler = this.titleChangeHandler.bind(this);
     this.amountChangeHandler = this.amountChangeHandler.bind(this);
@@ -39,19 +35,13 @@ class ExpenseForm extends React.Component {
 
     const expenseData = {
       title: this.state.enteredTitle,
-      price: this.state.enteredAmount,
+      price: +this.state.enteredAmount,
       date: new Date(this.state.enteredDate),
     };
 
     this.props.onSaveExpense(expenseData);
-
-    // this.setState({
-    //   enteredTitle: "",
-    //   enteredAmount: "",
-    //   enteredDate: "",
-    // });
-
-    // this.props.onCancel();
+    this.props.onCancel();
+    this.setState({ enteredTitle: "", enteredAmount: "", enteredDate: "" });
   }
 
   render() {
