@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../UI/Card";
-import ExpenseItem from "./ExpenseItem";
+import ExpensesList from "./ExpensesList";
 import ExpensesFilter from "./ExpensesFilter";
 import "./Expenses.css";
 
@@ -31,14 +31,7 @@ class Expenses extends React.Component {
           onChangeFilterYear={this.filterChangeHandler}
           defaultValue={this.state.selectedFilterYear}
         />
-        {this.filteredItems.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            price={expense.price}
-            date={expense.date}
-          />
-        ))}
+        <ExpensesList items={this.filteredItems} />
       </Card>
     );
   }
