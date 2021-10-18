@@ -1,43 +1,41 @@
-import "./NewExpense.css";
+import React, { useState } from "react";
+
 import ExpenseForm from "./ExpenseForm";
-import React from "react";
+import "./NewExpense.css";
 
-class NewExpense extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showForm: false };
-    this.formHandler = this.formHandler.bind(this);
-  }
+const NewExpense = (props) => {
+  const [isEditing, setIsEditing] = useState(false);
 
-  formHandler() {
-    this.setState((prevState) => ({
-      showForm: !prevState.showForm,
-    }));
-  }
-
-  saveExpenseDataHandler = (enteredData) => {
+  const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
-      ...enteredData,
+      ...enteredExpenseData,
       id: Math.random().toString(),
     };
-    this.props.onAddExpense(expenseData);
+    props.onAddExpense(expenseData);
+    setIsEditing(false);
   };
 
-  render() {
-    return (
-      <div className="new-expense">
-        {!this.state.showForm && (
-          <button onClick={this.formHandler}>Add New Expense</button>
-        )}
-        {this.state.showForm && (
-          <ExpenseForm
-            onCancel={this.formHandler}
-            onSaveExpense={this.saveExpenseDataHandler}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  const startEditingHandler = () => {
+    setIsEditing(true);
+  };
+
+  const stopEditingHandler = () => {
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="new-expense">
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
+    </div>
+  );
+};
 
 export default NewExpense;
