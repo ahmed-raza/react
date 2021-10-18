@@ -1,47 +1,52 @@
-import React from "react";
-import Expenses from "./components/Expenses/Expenses";
+import React, { useState } from "react";
+
 import NewExpense from "./components/NewExpense/NewExpense";
+import Expenses from "./components/Expenses/Expenses";
 
 const DUMMY_EXPENSES = [
   {
     id: "e1",
-    title: "Car Insurance",
-    price: "294.67",
-    date: new Date(2021, 9, 13),
+    title: "Toilet Paper",
+    amount: 94.12,
+    date: new Date(2020, 7, 14),
   },
-  {
-    id: "e2",
-    title: "Doctor Fee",
-    price: "312.67",
-    date: new Date(2021, 5, 8),
-  },
+  { id: "e2", title: "New TV", amount: 799.49, date: new Date(2021, 2, 12) },
   {
     id: "e3",
-    title: "Grocery",
-    price: "321.67",
-    date: new Date(2020, 8, 24),
+    title: "Car Insurance",
+    amount: 294.67,
+    date: new Date(2021, 2, 28),
+  },
+  {
+    id: "e4",
+    title: "New Desk (Wooden)",
+    amount: 450,
+    date: new Date(2021, 5, 12),
   },
 ];
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { expenses: DUMMY_EXPENSES };
-    this.addExpenseHandler = this.addExpenseHandler.bind(this);
-  }
+const App = () => {
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
-  addExpenseHandler(expense) {
-    this.setState({ expenses: [expense, ...this.state.expenses] });
-  }
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => {
+      return [expense, ...prevExpenses];
+    });
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <NewExpense onAddExpense={this.addExpenseHandler} />
-        <Expenses items={this.state.expenses} />
-      </div>
-    );
-  }
-}
+  // return React.createElement(
+  //   'div',
+  //   {},
+  //   React.createElement('h2', {}, "Let's get started!"),
+  //   React.createElement(Expenses, { items: expenses })
+  // );
+
+  return (
+    <div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses items={expenses} />
+    </div>
+  );
+};
 
 export default App;
