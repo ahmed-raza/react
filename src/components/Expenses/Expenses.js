@@ -21,7 +21,7 @@ class Expenses extends React.Component {
     });
 
     this.setState((prevState) => ({
-      filtered: !prevState.filtered,
+      filtered: true,
       selectedFilterYear: selectedYear,
       filteredItems: filteredResults,
     }));
