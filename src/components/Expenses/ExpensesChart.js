@@ -18,12 +18,10 @@ const chartDataPoints = [
 
 class ExpensesChart extends React.Component {
   render() {
-    console.log(this.props.expenses);
     for (const expense of this.props.expenses) {
       const expenseMonth = expense.date.getMonth();
       chartDataPoints[expenseMonth].value += expense.price;
     }
-    // console.log(chartDataPoints);
     return <Chart dataPoints={chartDataPoints} />;
   }
 }

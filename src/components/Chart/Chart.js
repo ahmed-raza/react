@@ -8,8 +8,6 @@ class Chart extends React.Component {
       (dataPoint) => dataPoint.value
     );
     const totalMaximum = Math.max(...dataPointValues);
-    // console.log(dataPointValues);
-    // console.log(totalMaximum);
     return (
       <div className="chart">
         {this.props.dataPoints.map((dataPoint) => (
