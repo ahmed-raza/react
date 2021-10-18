@@ -4,11 +4,12 @@ import "./ExpenseForm.css";
 class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { enteredTitle: "", enteredPrice: "", enteredDate: "" };
+    this.state = { enteredTitle: "", enteredAmount: "", enteredDate: "" };
 
     this.titleChangeHandler = this.titleChangeHandler.bind(this);
-    this.priceChangeHandler = this.priceChangeHandler.bind(this);
+    this.amountChangeHandler = this.amountChangeHandler.bind(this);
     this.dateChangeHandler = this.dateChangeHandler.bind(this);
+    this.formSubmitHandler = this.formSubmitHandler.bind(this);
   }
 
   titleChangeHandler(event) {
@@ -17,9 +18,9 @@ class ExpenseForm extends React.Component {
     });
   }
 
-  priceChangeHandler(event) {
+  amountChangeHandler(event) {
     this.setState({
-      enteredPrice: event.target.value,
+      enteredAmount: event.target.value,
     });
   }
 
@@ -29,13 +30,35 @@ class ExpenseForm extends React.Component {
     });
   }
 
+  formSubmitHandler(event) {
+    event.preventDefault();
+
+    const expenseData = {
+      title: this.state.enteredTitle,
+      price: this.state.enteredAmount,
+      date: new Date(this.state.enteredDate),
+    };
+
+    this.props.onSaveExpense(expenseData);
+
+    this.setState({
+      enteredTitle: "",
+      enteredAmount: "",
+      enteredDate: "",
+    });
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.formSubmitHandler}>
         <div className="new-expense__controls">
           <div className="new-expense__control">
             <label>Title</label>
-            <input type="text" onChange={this.titleChangeHandler} />
+            <input
+              type="text"
+              value={this.state.enteredTitle}
+              onChange={this.titleChangeHandler}
+            />
           </div>
           <div className="new-expense__control">
             <label>Amount</label>
@@ -43,7 +66,8 @@ class ExpenseForm extends React.Component {
               type="number"
               min="0.01"
               step="0.01"
-              onChange={this.priceChangeHandler}
+              value={this.state.enteredAmount}
+              onChange={this.amountChangeHandler}
             />
           </div>
           <div className="new-expense__control">
@@ -52,6 +76,7 @@ class ExpenseForm extends React.Component {
               type="date"
               min="2019-01-01"
               max="2022-12-31"
+              value={this.state.enteredDate}
               onChange={this.dateChangeHandler}
             />
           </div>
