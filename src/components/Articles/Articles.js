@@ -8,9 +8,16 @@ class Articles extends React.Component {
     }
 
     return (
-      <div>
+      <div className="articles">
         {this.props.articles.map((article) => {
-          <Article title={article.title} />;
+          return (
+            <Article
+              key={article.id}
+              title={article.title}
+              body={article.body}
+              image={article.image}
+            />
+          );
         })}
       </div>
     );

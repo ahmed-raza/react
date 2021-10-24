@@ -8,6 +8,7 @@ class App extends React.Component {
     this.state = { articles: [], load: "none" };
 
     this.getArticles = this.getArticles.bind(this);
+    this.getArticles();
   }
 
   getArticles = async () => {
@@ -26,9 +27,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <button className="ui primary button" onClick={this.getArticles}>
-          Get Articles
-        </button>
+        <div style={{ display: this.state.load }} className="ui active dimmer">
+          <div className="ui loader"></div>
+        </div>
         <Articles articles={this.state.articles} />
       </div>
     );
