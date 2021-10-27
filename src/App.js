@@ -1,39 +1,48 @@
-import React from "react";
-import dataApi from "./api/data";
-import Articles from "./components/Articles/Articles";
+import React, { useState } from "react";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { articles: [], load: "none" };
+import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
+import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
+import "./App.css";
 
-    this.getArticles = this.getArticles.bind(this);
-    this.getArticles();
-  }
+const App = () => {
+  const [courseGoals, setCourseGoals] = useState([
+    { text: "Do all exercises!", id: "g1" },
+    { text: "Finish the course!", id: "g2" },
+  ]);
 
-  getArticles = async () => {
-    dataApi.get("/jsonapi/node/article").then((res) => {
-      this.setState({ load: "block" });
-      const articles = res.data.data.map((article) => ({
-        id: article.id,
-        title: article.attributes.title,
-        body: article.attributes.body,
-        image: article.relationships.field_image,
-      }));
-      this.setState({ articles: articles, load: "none" });
+  const addGoalHandler = (enteredText) => {
+    setCourseGoals((prevGoals) => {
+      const updatedGoals = [...prevGoals];
+      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
+      return updatedGoals;
     });
   };
 
-  render() {
-    return (
-      <div>
-        <div style={{ display: this.state.load }} className="ui active dimmer">
-          <div className="ui loader"></div>
-        </div>
-        <Articles articles={this.state.articles} />
-      </div>
+  const deleteItemHandler = (goalId) => {
+    setCourseGoals((prevGoals) => {
+      const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
+      return updatedGoals;
+    });
+  };
+
+  let content = (
+    <p style={{ textAlign: "center" }}>No goals found. Maybe add one?</p>
+  );
+
+  if (courseGoals.length > 0) {
+    content = (
+      <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
     );
   }
-}
+
+  return (
+    <div>
+      <section id="goal-form">
+        <CourseInput onAddGoal={addGoalHandler} />
+      </section>
+      <section id="goals">{content}</section>
+    </div>
+  );
+};
 
 export default App;
