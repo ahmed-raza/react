@@ -1,12 +1,7 @@
 import React from "react";
-import UserFinder from "./components/UserFinder";
 
 function App() {
-  return (
-    <div>
-      <UserFinder />
-    </div>
-  );
+  return <div>App</div>;
 }
 
 export default App;
