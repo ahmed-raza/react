@@ -1,7 +1,13 @@
 import React from "react";
+import { Container } from "semantic-ui-react";
+import Search from "./components/Search";
 
 function App() {
-  return <div>App</div>;
+  return (
+    <Container>
+      <Search />
+    </Container>
+  );
 }
 
 export default App;
