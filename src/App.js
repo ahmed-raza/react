@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Auth/Login";
-import { action as logoutAction } from "./components/Auth/Logout";
+import { logoutAction } from "./components/Auth/Logout";
 import Signup from "./components/Auth/Signup";
 import Error from "./components/Pages/Error";
 import Home from "./components/Pages/Home";

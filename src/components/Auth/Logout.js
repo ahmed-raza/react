@@ -1,7 +1,7 @@
 import axios from "axios";
 import { redirect } from "react-router-dom";
 
-export async function action() {
+export async function logoutAction() {
   await axios
     .get("http://127.0.0.1:8000/api/logout", {
       headers: {
