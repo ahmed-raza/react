@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login, { action } from "./components/Auth/Login";
 import { logoutAction } from "./components/Auth/Logout";
-import Signup from "./components/Auth/Signup";
+import Signup, { signupAction } from "./components/Auth/Signup";
 import Error from "./components/Pages/Error";
 import Home from "./components/Pages/Home";
 import MyAccount from "./components/Pages/MyAccount";
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    // errorElement: <Error />,
+    errorElement: <Error />,
     id: "root",
     loader: tokenLoader,
     children: [
@@ -29,7 +29,12 @@ const router = createBrowserRouter([
         action: action,
         loader: checkAuthLoaderNegate,
       },
-      { path: "/signup", element: <Signup />, loader: checkAuthLoaderNegate },
+      {
+        path: "/signup",
+        element: <Signup />,
+        action: signupAction,
+        loader: checkAuthLoaderNegate,
+      },
       { path: "/logout", action: logoutAction },
     ],
   },
