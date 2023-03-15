@@ -12,7 +12,8 @@ export async function logoutAction() {
     })
     .then(() => {
       localStorage.removeItem("access_token");
-      return redirect("/");
+      localStorage.removeItem("user");
+      return redirect("/login");
     });
-  return redirect("/");
+  return redirect("/login");
 }

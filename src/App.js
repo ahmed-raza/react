@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/Auth/Login";
+import Login, { action } from "./components/Auth/Login";
 import { logoutAction } from "./components/Auth/Logout";
 import Signup from "./components/Auth/Signup";
 import Error from "./components/Pages/Error";
@@ -17,13 +17,18 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     id: "root",
     loader: tokenLoader,
     children: [
       { path: "/", element: <Home /> },
       { path: "/my-account", element: <MyAccount />, loader: checkAuthLoader },
-      { path: "/login", element: <Login />, loader: checkAuthLoaderNegate },
+      {
+        path: "/login",
+        element: <Login />,
+        action: action,
+        loader: checkAuthLoaderNegate,
+      },
       { path: "/signup", element: <Signup />, loader: checkAuthLoaderNegate },
       { path: "/logout", action: logoutAction },
     ],

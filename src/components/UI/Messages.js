@@ -11,8 +11,8 @@ const Messages = (props) => {
       <p>{props.messages.message}</p>
       {hasErrors ? (
         <ul>
-          {Object.keys(errors).map((key, error) => (
-            <li key={key}>{errors[key][0]}</li>
+          {Object.values(errors).map((error) => (
+            <li key={error}>{error}</li>
           ))}
         </ul>
       ) : undefined}
