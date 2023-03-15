@@ -18,11 +18,16 @@ const MainNavigation = () => {
           </NavLink>
         </li>
         {token && (
-          <li>
-            <Form action="/logout" method="POST">
-              <button>Logout</button>
-            </Form>
-          </li>
+          <>
+            <li>
+              <NavLink to="/my-account">My Account</NavLink>
+            </li>
+            <li>
+              <Form action="/logout" method="POST">
+                <button>Logout</button>
+              </Form>
+            </li>
+          </>
         )}
         {!token && (
           <>

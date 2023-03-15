@@ -4,9 +4,14 @@ import { logoutAction } from "./components/Auth/Logout";
 import Signup from "./components/Auth/Signup";
 import Error from "./components/Pages/Error";
 import Home from "./components/Pages/Home";
+import MyAccount from "./components/Pages/MyAccount";
 import RootLayout from "./components/RootLayout";
 import "./components/Styles/common.module.css";
-import { checkAuthLoader, tokenLoader } from "./components/util/auth";
+import {
+  checkAuthLoader,
+  checkAuthLoaderNegate,
+  tokenLoader,
+} from "./components/util/auth";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +22,9 @@ const router = createBrowserRouter([
     loader: tokenLoader,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/login", element: <Login />, loader: checkAuthLoader },
-      { path: "/signup", element: <Signup />, loader: checkAuthLoader },
+      { path: "/my-account", element: <MyAccount />, loader: checkAuthLoader },
+      { path: "/login", element: <Login />, loader: checkAuthLoaderNegate },
+      { path: "/signup", element: <Signup />, loader: checkAuthLoaderNegate },
       { path: "/logout", action: logoutAction },
     ],
   },

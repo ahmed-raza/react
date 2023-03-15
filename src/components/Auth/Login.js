@@ -34,12 +34,11 @@ const Login = () => {
       .catch(({ response }) => {
         setErrors(response.data);
       });
-    navigate("/");
   };
 
   return (
     <Card title="Login">
-      {errors ? <Messages messages={errors} /> : undefined}
+      {errors && <Messages messages={errors} />}
       <form onSubmit={loginSubmitHandler}>
         <div>
           <label htmlFor="email">Email</label>

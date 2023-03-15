@@ -2,7 +2,6 @@ import { redirect } from "react-router-dom";
 
 export function getAuthToken() {
   const token = localStorage.getItem("access_token");
-  console.log(token);
   return token;
 }
 
@@ -16,6 +15,14 @@ export function getAuthUser() {
 }
 
 export function checkAuthLoader() {
+  const token = getAuthToken();
+  if (!token) {
+    return redirect("/");
+  }
+  return null;
+}
+
+export function checkAuthLoaderNegate() {
   const token = getAuthToken();
   if (token) {
     return redirect("/");
