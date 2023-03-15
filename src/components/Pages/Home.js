@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouteLoaderData } from "react-router-dom";
 import Card from "../UI/Card";
-import { getAuthUser } from "../util/auth";
 
 const Home = () => {
   const token = useRouteLoaderData("root");

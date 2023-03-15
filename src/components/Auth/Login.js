@@ -66,7 +66,6 @@ export async function action({ request }) {
     .post("http://127.0.0.1:8000/api/login", creds)
     .then((res) => {
       localStorage.setItem("access_token", res.data.access_token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
       return res;
     })
     .catch(({ response }) => {
