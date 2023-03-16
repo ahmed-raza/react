@@ -52,7 +52,9 @@ const UsersList = () => {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>{user.created_at}</td>
-                <td>Edit | Delete</td>
+                <td>
+                  <Link to={`/user/${user.id}/edit`}>Edit</Link> | Delete
+                </td>
               </tr>
             ))}
         </tbody>

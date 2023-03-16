@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login, { action } from "./components/Auth/Login";
 import { logoutAction } from "./components/Auth/Logout";
 import Signup, { signupAction } from "./components/Auth/Signup";
+import EditUser from "./components/Pages/EditUser";
 import Error from "./components/Pages/Error";
 import Home from "./components/Pages/Home";
 import MyAccount from "./components/Pages/MyAccount";
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
       {
         path: "/user/:id",
         element: <UserDetails />,
+        loader: checkAuthLoader,
+      },
+      {
+        path: "/user/:id/edit",
+        element: <EditUser />,
         loader: checkAuthLoader,
       },
       {
