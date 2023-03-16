@@ -5,6 +5,7 @@ import Signup, { signupAction } from "./components/Auth/Signup";
 import Error from "./components/Pages/Error";
 import Home from "./components/Pages/Home";
 import MyAccount from "./components/Pages/MyAccount";
+import NewUser, { newUserAction } from "./components/Pages/NewUser";
 import RootLayout from "./components/RootLayout";
 import "./components/Styles/common.module.css";
 import {
@@ -17,12 +18,18 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     id: "root",
     loader: tokenLoader,
     children: [
       { path: "/", element: <Home /> },
       { path: "/my-account", element: <MyAccount />, loader: checkAuthLoader },
+      {
+        path: "/new-user",
+        element: <NewUser />,
+        action: newUserAction,
+        loader: checkAuthLoader,
+      },
       {
         path: "/login",
         element: <Login />,

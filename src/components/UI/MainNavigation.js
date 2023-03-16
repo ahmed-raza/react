@@ -20,6 +20,9 @@ const MainNavigation = () => {
         {token && (
           <>
             <li>
+              <NavLink to="/new-user">Add New User</NavLink>
+            </li>
+            <li>
               <NavLink to="/my-account">My Account</NavLink>
             </li>
             <li>
