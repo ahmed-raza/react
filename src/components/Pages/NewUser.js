@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Form, useActionData } from "react-router-dom";
+import { Form, redirect, useActionData } from "react-router-dom";
 import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
@@ -67,7 +67,7 @@ export async function newUserAction({ request }) {
       },
     })
     .then((response) => {
-      return response.data;
+      return redirect("/list-users");
     })
     .catch(({ response }) => {
       return response.data;

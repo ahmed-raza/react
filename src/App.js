@@ -6,6 +6,8 @@ import Error from "./components/Pages/Error";
 import Home from "./components/Pages/Home";
 import MyAccount from "./components/Pages/MyAccount";
 import NewUser, { newUserAction } from "./components/Pages/NewUser";
+import UserDetails from "./components/Pages/UserDetails";
+import UsersList from "./components/Pages/UsersList";
 import RootLayout from "./components/RootLayout";
 import "./components/Styles/common.module.css";
 import {
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    // errorElement: <Error />,
+    errorElement: <Error />,
     id: "root",
     loader: tokenLoader,
     children: [
@@ -28,6 +30,16 @@ const router = createBrowserRouter([
         path: "/new-user",
         element: <NewUser />,
         action: newUserAction,
+        loader: checkAuthLoader,
+      },
+      {
+        path: "/list-users",
+        element: <UsersList />,
+        loader: checkAuthLoader,
+      },
+      {
+        path: "/user/:id",
+        element: <UserDetails />,
         loader: checkAuthLoader,
       },
       {

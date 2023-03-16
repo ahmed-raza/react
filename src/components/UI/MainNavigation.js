@@ -23,6 +23,9 @@ const MainNavigation = () => {
               <NavLink to="/new-user">Add New User</NavLink>
             </li>
             <li>
+              <NavLink to="/list-users">Users</NavLink>
+            </li>
+            <li>
               <NavLink to="/my-account">My Account</NavLink>
             </li>
             <li>
