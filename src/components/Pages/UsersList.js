@@ -45,7 +45,7 @@ const UsersList = () => {
   }
 
   const deleteUser = (id) => {
-    if (id == user.id) {
+    if (id === user.id) {
       console.log(user);
       return;
     }
@@ -78,6 +78,7 @@ const UsersList = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Calories Limit</th>
             <th>Created At</th>
             <th>Actions</th>
           </tr>
@@ -92,6 +93,7 @@ const UsersList = () => {
                 </td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
+                <td>{user.calories}</td>
                 <td>{user.created_at}</td>
                 <td>
                   <Link to={`/user/${user.id}/edit`}>Edit</Link> |{" "}

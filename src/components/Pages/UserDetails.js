@@ -48,6 +48,9 @@ const UserDetails = () => {
             <strong>Role: </strong> {user.role}
           </div>
           <div>
+            <strong>Daily Calories Limit: </strong> {user.calories}
+          </div>
+          <div>
             <strong>Member since: </strong> {user.created_at}
           </div>
         </>

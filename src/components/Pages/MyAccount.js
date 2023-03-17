@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Card from "../UI/Card";
-import { getAuthToken, getAuthUser } from "../util/auth";
+import { getAuthToken } from "../util/auth";
 
 const MyAccount = () => {
   const [user, setUser] = useState();
@@ -36,6 +36,9 @@ const MyAccount = () => {
           </div>
           <div>
             <strong>Role: </strong> {user.role}
+          </div>
+          <div>
+            <strong>Daily Calories Limit: </strong> {user.calories}
           </div>
           <div>
             <strong>Member since: </strong> {user.created_at}
