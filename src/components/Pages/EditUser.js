@@ -17,7 +17,7 @@ const EditUser = () => {
   const data = useActionData();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [calories, setCalories] = useState();
   const [role, setRole] = useState();
   const [messages, setMessages] = useState();
 
@@ -40,6 +40,7 @@ const EditUser = () => {
         setName(response.data.name);
         setEmail(response.data.email);
         setRole(response.data.role);
+        setCalories(response.data.calories);
       })
       .catch((response) => {
         console.log(response);
@@ -55,17 +56,21 @@ const EditUser = () => {
   };
 
   const passwordChangeHandler = (event) => {
-    setEmail(event.target.value);
+    // setEmail(event.target.value);
   };
 
   const roleChangeHandler = (event) => {
     setEmail(event.target.value);
   };
 
+  const caloriesChangeHandler = (event) => {
+    setCalories(event.target.value);
+  };
+
   const userUpdateSubmitHandler = (event) => {
     event.preventDefault();
     const token = getAuthToken();
-    const userData = { name, email, role };
+    const userData = { name, email, role, calories };
     axios
       .patch("http://127.0.0.1:8000/api/update-user/" + user_id, userData, {
         headers: {
@@ -127,6 +132,16 @@ const EditUser = () => {
             <option value="manager">Manager</option>
             <option value="user">User</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="calories">Calories</label>
+          <input
+            type="number"
+            name="calories"
+            id="calories"
+            value={calories}
+            onChange={caloriesChangeHandler}
+          />
         </div>
         <div>
           <input type="submit" value="Update User" />

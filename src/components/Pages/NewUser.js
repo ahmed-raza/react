@@ -38,6 +38,10 @@ const NewUser = () => {
           </select>
         </div>
         <div>
+          <label htmlFor="calories">Calories</label>
+          <input type="number" name="calories" id="calories" />
+        </div>
+        <div>
           <input type="submit" value="Create User" />
         </div>
       </Form>
@@ -56,6 +60,7 @@ export async function newUserAction({ request }) {
     email: data.get("email"),
     password: data.get("password"),
     role: data.get("role"),
+    calories: data.get("calories"),
   };
 
   const newUser = await axios

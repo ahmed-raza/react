@@ -83,7 +83,7 @@ const UsersList = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody align="center">
           {users &&
             users.map((user) => (
               <tr key={user.id}>
@@ -97,7 +97,9 @@ const UsersList = () => {
                 <td>{user.created_at}</td>
                 <td>
                   <Link to={`/user/${user.id}/edit`}>Edit</Link> |{" "}
-                  <button onClick={() => deleteUser(user.id)}>Delete</button>
+                  <a href="#" onClick={() => deleteUser(user.id)}>
+                    Delete
+                  </a>
                 </td>
               </tr>
             ))}
