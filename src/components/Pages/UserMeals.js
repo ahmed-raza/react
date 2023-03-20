@@ -43,6 +43,7 @@ const UserMeals = ({ user_id, title, add_more }) => {
             <th>Calories</th>
             <th>Start Date</th>
             <th>End Date</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody align="center">
@@ -63,6 +64,9 @@ const UserMeals = ({ user_id, title, add_more }) => {
                   </td>
                   <td>{meal.start_date}</td>
                   <td>{meal.end_date}</td>
+                  <td>
+                    <Link to={`/meal/${meal.id}/edit`}>Edit</Link>
+                  </td>
                 </tr>
               );
             })}

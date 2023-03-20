@@ -19,6 +19,7 @@ import {
   checkAuthLoaderNegate,
   tokenLoader,
 } from "./components/util/auth";
+import UpdateMeal, { mealUpdateAction } from "./components/Pages/UpdateMeal";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,12 @@ const router = createBrowserRouter([
         path: "/add-meal",
         element: <AddMeal />,
         action: addMealAction,
+        loader: checkAuthLoader,
+      },
+      {
+        path: "/meal/:id/edit",
+        element: <UpdateMeal />,
+        action: mealUpdateAction,
         loader: checkAuthLoader,
       },
       {

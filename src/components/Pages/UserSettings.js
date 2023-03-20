@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
@@ -47,7 +48,7 @@ const UserSettings = () => {
     const token = getAuthToken();
     const userData = { name, email, role, calories };
     axios
-      .patch("http://127.0.0.1:8000/api/my-settings/" + user.id, userData, {
+      .put("http://127.0.0.1:8000/api/my-settings/" + user.id, userData, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -63,24 +64,29 @@ const UserSettings = () => {
   };
 
   return (
-    <Card title="Settings">
+    <>
+      <h1>Settings</h1>
       {messages && <Messages messages={messages} />}
-      <form onSubmit={userUpdateSubmitHandler}>
-        <div>
-          <label htmlFor="calories">Calories</label>
-          <input
-            type="number"
-            name="calories"
-            id="calories"
-            value={calories}
-            onChange={caloriesChangeHandler}
-          />
-        </div>
-        <div>
-          <input type="submit" value="Save Settings" />
-        </div>
-      </form>
-    </Card>
+      <Row>
+        <Col lg="4">
+          <Form onSubmit={userUpdateSubmitHandler}>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Calories</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="calories"
+                  id="calories"
+                  value={calories}
+                  onChange={caloriesChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <Button as="input" type="submit" value="Save" />
+          </Form>
+        </Col>
+      </Row>
+    </>
   );
 };
 
