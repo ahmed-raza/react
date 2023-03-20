@@ -8,6 +8,7 @@ import Home from "./components/Pages/Home";
 import MyAccount from "./components/Pages/MyAccount";
 import NewUser, { newUserAction } from "./components/Pages/NewUser";
 import UserDetails from "./components/Pages/UserDetails";
+import UserSettings from "./components/Pages/UserSettings";
 import UsersList from "./components/Pages/UsersList";
 import RootLayout from "./components/RootLayout";
 import "./components/Styles/common.module.css";
@@ -21,12 +22,17 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     id: "root",
     loader: tokenLoader,
     children: [
       { path: "/", element: <Home /> },
       { path: "/my-account", element: <MyAccount />, loader: checkAuthLoader },
+      {
+        path: "/my-settings",
+        element: <UserSettings />,
+        loader: checkAuthLoader,
+      },
       {
         path: "/new-user",
         element: <NewUser />,

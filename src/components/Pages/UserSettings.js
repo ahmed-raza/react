@@ -1,20 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Form,
-  useActionData,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useActionData, useParams } from "react-router-dom";
 import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 
-const EditUser = () => {
+const UserSettings = () => {
   const [user, setUser] = useState();
-  const params = useParams();
-  const user_id = params.id;
-  const data = useActionData();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [calories, setCalories] = useState();
@@ -28,7 +20,7 @@ const EditUser = () => {
   async function getUser() {
     const token = getAuthToken();
     await axios
-      .get("http://127.0.0.1:8000/api/user/" + user_id, {
+      .get("http://127.0.0.1:8000/api/user", {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -60,7 +52,7 @@ const EditUser = () => {
   };
 
   const roleChangeHandler = (event) => {
-    setRole(event.target.value);
+    setEmail(event.target.value);
   };
 
   const caloriesChangeHandler = (event) => {
@@ -72,7 +64,7 @@ const EditUser = () => {
     const token = getAuthToken();
     const userData = { name, email, role, calories };
     axios
-      .patch("http://127.0.0.1:8000/api/update-user/" + user_id, userData, {
+      .patch("http://127.0.0.1:8000/api/my-settings/" + user.id, userData, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -88,51 +80,9 @@ const EditUser = () => {
   };
 
   return (
-    <Card title="Edit user">
+    <Card title="Settings">
       {messages && <Messages messages={messages} />}
       <form onSubmit={userUpdateSubmitHandler}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={nameChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="Email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={emailChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={passwordChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="role">Role</label>
-          <select
-            name="role"
-            id="role"
-            value={role}
-            onChange={roleChangeHandler}
-          >
-            <option value="admin1">Admin</option>
-            <option value="manager">Manager</option>
-            <option value="user">User</option>
-          </select>
-        </div>
         <div>
           <label htmlFor="calories">Calories</label>
           <input
@@ -144,11 +94,11 @@ const EditUser = () => {
           />
         </div>
         <div>
-          <input type="submit" value="Update User" />
+          <input type="submit" value="Save Settings" />
         </div>
       </form>
     </Card>
   );
 };
 
-export default EditUser;
+export default UserSettings;

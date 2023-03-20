@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Card from "../UI/Card";
 import { getAuthToken } from "../util/auth";
 
@@ -28,6 +29,7 @@ const MyAccount = () => {
     <Card title="My Account">
       {user && (
         <>
+          <Link to="/my-settings">Set Calories</Link>
           <div>
             <strong>Name: </strong> {user.name}
           </div>
