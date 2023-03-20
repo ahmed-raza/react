@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { getUserMeals } from "../util/data";
 
 const UserMeals = ({ user_id }) => {
   const [meals, setMeals] = useState();
+  const location = useLocation();
 
   useEffect(() => {
     refreshMealsHandler();
@@ -19,6 +21,7 @@ const UserMeals = ({ user_id }) => {
   return (
     <>
       <h2>My Meals</h2>
+      <Link to={`/add-meal?redirect=${location.pathname}`}>Add Meal</Link>
       <table width="100%" border="1">
         <thead>
           <tr>

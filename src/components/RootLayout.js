@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, useLoaderData } from "react-router-dom";
+import React from "react";
+import { Container } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 import MainNavigation from "./UI/MainNavigation";
 
 const RootLayout = () => {
   return (
     <>
-      <MainNavigation />
-      <Outlet />
+      <Container>
+        <MainNavigation />
+        <Outlet />
+      </Container>
     </>
   );
 };
