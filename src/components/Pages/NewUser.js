@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, redirect, useActionData } from "react-router-dom";
-import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 
@@ -14,7 +13,8 @@ const NewUser = () => {
     }
   }, [data]);
   return (
-    <Card title="Add New User">
+    <>
+      <h1>Add new user</h1>
       {messages && <Messages messages={messages} />}
       <Form method="post">
         <div>
@@ -45,7 +45,7 @@ const NewUser = () => {
           <input type="submit" value="Create User" />
         </div>
       </Form>
-    </Card>
+    </>
   );
 };
 

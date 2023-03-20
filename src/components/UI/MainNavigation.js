@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Form, Link, NavLink, useRouteLoaderData } from "react-router-dom";
-import classes from "../Styles/nav.module.css";
+import { Form, useRouteLoaderData } from "react-router-dom";
 import { getAuthUser } from "../util/auth";
 
 const MainNavigation = () => {
@@ -22,7 +21,7 @@ const MainNavigation = () => {
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">CMS</Navbar.Brand>
+          <Navbar.Brand href="#home">Calories Management</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -46,7 +45,14 @@ const MainNavigation = () => {
                   </LinkContainer>
                   <NavDropdown.Divider />
                   <Form action="/logout" method="post">
-                    <Button type="submit">Logout</Button>
+                    <div className="d-grid">
+                      <Button
+                        as="input"
+                        type="submit"
+                        size="sm"
+                        value="Logout"
+                      ></Button>
+                    </div>
                   </Form>
                 </NavDropdown>
               )}

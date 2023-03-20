@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Form, redirect, useActionData, useLocation } from "react-router-dom";
-import Card from "../UI/Card";
+import { Form, redirect, useActionData } from "react-router-dom";
+import { Button, Form as bForm } from "react-bootstrap";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 
@@ -17,30 +17,37 @@ const AddMeal = () => {
   }, [data]);
 
   return (
-    <Card title="Add Meal">
+    <>
+      <h1>Add Meal</h1>
       {messages && <Messages messages={messages} />}
       <Form method="post">
-        <div>
-          <label htmlFor="meal">Meal</label>
-          <input type="text" name="meal" id="meal" />
+        <div className="mb-3">
+          <bForm.Group>
+            <bForm.Label>Meal</bForm.Label>
+            <bForm.Control type="text" name="meal" id="meal" />
+          </bForm.Group>
         </div>
-        <div>
-          <label htmlFor="calories">Calories in this meal</label>
-          <input type="number" name="calories" id="calories" />
+        <div className="mb-3">
+          <bForm.Group>
+            <bForm.Label>Calories in this meal</bForm.Label>
+            <bForm.Control type="number" name="calories" id="calories" />
+          </bForm.Group>
         </div>
-        <div>
-          <label htmlFor="start_date">Start Date</label>
-          <input type="date" name="start_date" id="start_date" />
+        <div className="mb-3">
+          <bForm.Group>
+            <bForm.Label>Start Date</bForm.Label>
+            <bForm.Control type="date" name="start_date" id="start_date" />
+          </bForm.Group>
         </div>
-        <div>
-          <label htmlFor="end_date">End Date</label>
-          <input type="date" name="end_date" id="end_date" />
+        <div className="mb-3">
+          <bForm.Group>
+            <bForm.Label>End Date</bForm.Label>
+            <bForm.Control type="date" name="end_date" id="end_date" />
+          </bForm.Group>
         </div>
-        <div>
-          <input type="submit" value="Add Meal" />
-        </div>
+        <Button as="input" type="submit" value="Add Meal"></Button>
       </Form>
-    </Card>
+    </>
   );
 };
 

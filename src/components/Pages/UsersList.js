@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Card from "../UI/Card";
 import Messages from "../UI/Messages";
@@ -67,11 +68,15 @@ const UsersList = () => {
   };
 
   return (
-    <Card title="Users">
+    <>
+      <h1>Users</h1>
       {messages && <Messages messages={messages} />}
-      <Link to="/new-user">Add User</Link>
-      <hr />
-      <table border="1" width="100%">
+      <div className="mb-2">
+        <Link to="/new-user" className="btn btn-primary">
+          Add User
+        </Link>
+      </div>
+      <Table bordered striped hover>
         <thead>
           <tr>
             <th>ID</th>
@@ -104,8 +109,8 @@ const UsersList = () => {
               </tr>
             ))}
         </tbody>
-      </table>
-    </Card>
+      </Table>
+    </>
   );
 };
 

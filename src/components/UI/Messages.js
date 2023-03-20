@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
 
 const Messages = (props) => {
+  const [show, setShow] = useState(true);
   const hasErrors = props.messages.errors !== undefined;
   const errors = hasErrors ? props.messages.errors : [];
 
-  console.log();
+  useEffect(() => {
+    setShow(true);
+  }, [errors]);
 
-  return (
-    <div className={`messages${hasErrors ? " error" : " success"}`}>
-      <p>{props.messages.message}</p>
-      {hasErrors ? (
-        <ul>
-          {Object.values(errors).map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      ) : undefined}
-    </div>
-  );
+  if (show) {
+    return (
+      <Alert
+        variant={hasErrors ? "danger" : "success"}
+        onClick={() => {
+          setShow(false);
+        }}
+        dismissible
+      >
+        {props.messages.message}
+        {hasErrors ? (
+          <ul>
+            {Object.values(errors).map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        ) : undefined}
+      </Alert>
+    );
+  }
+  return;
 };
 
 export default Messages;

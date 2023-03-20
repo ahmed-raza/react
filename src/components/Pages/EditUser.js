@@ -1,12 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Form,
-  useActionData,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
-import Card from "../UI/Card";
+import { useParams } from "react-router-dom";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 
@@ -14,7 +8,6 @@ const EditUser = () => {
   const [user, setUser] = useState();
   const params = useParams();
   const user_id = params.id;
-  const data = useActionData();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [calories, setCalories] = useState();
@@ -88,7 +81,8 @@ const EditUser = () => {
   };
 
   return (
-    <Card title="Edit user">
+    <>
+      <h1>Edit User</h1>
       {messages && <Messages messages={messages} />}
       <form onSubmit={userUpdateSubmitHandler}>
         <div>
@@ -147,7 +141,7 @@ const EditUser = () => {
           <input type="submit" value="Update User" />
         </div>
       </form>
-    </Card>
+    </>
   );
 };
 

@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useActionData, useParams } from "react-router-dom";
 import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
@@ -38,22 +37,6 @@ const UserSettings = () => {
         console.log(response);
       });
   }
-
-  const nameChangeHandler = (event) => {
-    setName(event.target.value);
-  };
-
-  const emailChangeHandler = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const passwordChangeHandler = (event) => {
-    // setEmail(event.target.value);
-  };
-
-  const roleChangeHandler = (event) => {
-    setEmail(event.target.value);
-  };
 
   const caloriesChangeHandler = (event) => {
     setCalories(event.target.value);

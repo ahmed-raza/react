@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
+import UserMeals from "./UserMeals";
 
 const UserDetails = () => {
   const [user, setUser] = useState();
@@ -34,7 +34,7 @@ const UserDetails = () => {
   }
 
   return (
-    <Card title={`User: ${user && user.name}`}>
+    <>
       {messages && <Messages messages={messages} />}
       {user && (
         <>
@@ -53,9 +53,10 @@ const UserDetails = () => {
           <div>
             <strong>Member since: </strong> {user.created_at}
           </div>
+          <UserMeals user_id={user.id} add_more />
         </>
       )}
-    </Card>
+    </>
   );
 };
 

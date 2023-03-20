@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
+import { getAuthUser } from "../util/auth";
 import { getUserMeals } from "../util/data";
 
-const UserMeals = ({ user_id }) => {
+const UserMeals = ({ user_id, title, add_more }) => {
   const [meals, setMeals] = useState();
+  const [user, setUser] = useState();
   const location = useLocation();
 
   useEffect(() => {
     refreshMealsHandler();
+    getAuthUser().then((response) => {
+      setUser(response.data);
+    });
   }, [user_id]);
 
   const refreshMealsHandler = () => {
@@ -20,9 +26,16 @@ const UserMeals = ({ user_id }) => {
 
   return (
     <>
-      <h2>My Meals</h2>
-      <Link to={`/add-meal?redirect=${location.pathname}`}>Add Meal</Link>
-      <table width="100%" border="1">
+      {title && <h1>Add Meal</h1>}
+      <div className="mt-2 mb-2">
+        <Link
+          to={`/add-meal?redirect=${location.pathname}`}
+          className="btn btn-primary"
+        >
+          Add Meal
+        </Link>
+      </div>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>ID</th>
@@ -39,14 +52,22 @@ const UserMeals = ({ user_id }) => {
                 <tr key={meal.id}>
                   <td>{meal.id}</td>
                   <td>{meal.meal}</td>
-                  <td>{meal.calories}</td>
+                  <td
+                    className={
+                      user && user.calories < meal.calories
+                        ? "bg-danger"
+                        : "bg-success"
+                    }
+                  >
+                    {meal.calories}
+                  </td>
                   <td>{meal.start_date}</td>
                   <td>{meal.end_date}</td>
                 </tr>
               );
             })}
         </tbody>
-      </table>
+      </Table>
     </>
   );
 };
