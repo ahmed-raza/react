@@ -64,46 +64,6 @@ const MainNavigation = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className={classes.nav}>
-        <ul>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-              end
-            >
-              Home
-            </NavLink>
-          </li>
-          {token && (
-            <>
-              {user && user.role !== "user" && (
-                <li>
-                  <NavLink to="/list-users">List Users</NavLink>
-                </li>
-              )}
-              <li>
-                <NavLink to="/my-account">My Account</NavLink>
-              </li>
-              <li>
-                <Form action="/logout" method="POST">
-                  <button>Logout</button>
-                </Form>
-              </li>
-            </>
-          )}
-          {!token && (
-            <>
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">Signup</NavLink>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
     </>
   );
 };
