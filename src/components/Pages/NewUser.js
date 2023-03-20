@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, redirect, useActionData } from "react-router-dom";
+import { Button, Col, Form as bForm, Row } from "react-bootstrap";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 
@@ -16,35 +17,47 @@ const NewUser = () => {
     <>
       <h1>Add new user</h1>
       {messages && <Messages messages={messages} />}
-      <Form method="post">
-        <div>
-          <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" />
-        </div>
-        <div>
-          <label htmlFor="role">Role</label>
-          <select name="role" id="role">
-            <option value="admin">Admin</option>
-            <option value="manager">Manager</option>
-            <option value="user">User</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="calories">Calories</label>
-          <input type="number" name="calories" id="calories" />
-        </div>
-        <div>
-          <input type="submit" value="Create User" />
-        </div>
-      </Form>
+      <Row>
+        <Col lg="4">
+          <Form method="post">
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Name</bForm.Label>
+                <bForm.Control type="text" name="name" id="name" />
+              </bForm.Group>
+            </div>
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Email</bForm.Label>
+                <bForm.Control type="email" name="email" id="email" />
+              </bForm.Group>
+            </div>
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Password</bForm.Label>
+                <bForm.Control type="password" name="password" id="password" />
+              </bForm.Group>
+            </div>
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Name</bForm.Label>
+                <bForm.Select name="role" id="role">
+                  <option value="admin">Admin</option>
+                  <option value="manager">Manager</option>
+                  <option value="user">User</option>
+                </bForm.Select>
+              </bForm.Group>
+            </div>
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Calories</bForm.Label>
+                <bForm.Control type="number" name="calories" id="calories" />
+              </bForm.Group>
+            </div>
+            <Button as="input" type="submit" value="Add User" />
+          </Form>
+        </Col>
+      </Row>
     </>
   );
 };

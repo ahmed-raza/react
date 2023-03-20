@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
@@ -84,63 +85,70 @@ const EditUser = () => {
     <>
       <h1>Edit User</h1>
       {messages && <Messages messages={messages} />}
-      <form onSubmit={userUpdateSubmitHandler}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={nameChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="Email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={emailChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={passwordChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="role">Role</label>
-          <select
-            name="role"
-            id="role"
-            value={role}
-            onChange={roleChangeHandler}
-          >
-            <option value="admin1">Admin</option>
-            <option value="manager">Manager</option>
-            <option value="user">User</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="calories">Calories</label>
-          <input
-            type="number"
-            name="calories"
-            id="calories"
-            value={calories}
-            onChange={caloriesChangeHandler}
-          />
-        </div>
-        <div>
-          <input type="submit" value="Update User" />
-        </div>
-      </form>
+      <Row>
+        <Col lg="4">
+          <Form onSubmit={userUpdateSubmitHandler}>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={name}
+                  onChange={nameChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={emailChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={passwordChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Role</Form.Label>
+                <Form.Select name="role" id="role" value={role}>
+                  <option value="admin1">Admin</option>
+                  <option value="manager">Manager</option>
+                  <option value="user">User</option>
+                </Form.Select>
+              </Form.Group>
+            </div>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Calories</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="calories"
+                  id="calories"
+                  value={calories}
+                  onChange={caloriesChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <Button as="input" type="submit" value="Update User" />
+          </Form>
+        </Col>
+      </Row>
     </>
   );
 };

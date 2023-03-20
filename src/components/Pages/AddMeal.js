@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, redirect, useActionData } from "react-router-dom";
-import { Button, Form as bForm } from "react-bootstrap";
+import { Button, Col, Form as bForm, Row } from "react-bootstrap";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 
@@ -20,33 +20,37 @@ const AddMeal = () => {
     <>
       <h1>Add Meal</h1>
       {messages && <Messages messages={messages} />}
-      <Form method="post">
-        <div className="mb-3">
-          <bForm.Group>
-            <bForm.Label>Meal</bForm.Label>
-            <bForm.Control type="text" name="meal" id="meal" />
-          </bForm.Group>
-        </div>
-        <div className="mb-3">
-          <bForm.Group>
-            <bForm.Label>Calories in this meal</bForm.Label>
-            <bForm.Control type="number" name="calories" id="calories" />
-          </bForm.Group>
-        </div>
-        <div className="mb-3">
-          <bForm.Group>
-            <bForm.Label>Start Date</bForm.Label>
-            <bForm.Control type="date" name="start_date" id="start_date" />
-          </bForm.Group>
-        </div>
-        <div className="mb-3">
-          <bForm.Group>
-            <bForm.Label>End Date</bForm.Label>
-            <bForm.Control type="date" name="end_date" id="end_date" />
-          </bForm.Group>
-        </div>
-        <Button as="input" type="submit" value="Add Meal"></Button>
-      </Form>
+      <Row>
+        <Col lg="4">
+          <Form method="post">
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Meal</bForm.Label>
+                <bForm.Control type="text" name="meal" id="meal" />
+              </bForm.Group>
+            </div>
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Calories in this meal</bForm.Label>
+                <bForm.Control type="number" name="calories" id="calories" />
+              </bForm.Group>
+            </div>
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>Start Date</bForm.Label>
+                <bForm.Control type="date" name="start_date" id="start_date" />
+              </bForm.Group>
+            </div>
+            <div className="mb-3">
+              <bForm.Group>
+                <bForm.Label>End Date</bForm.Label>
+                <bForm.Control type="date" name="end_date" id="end_date" />
+              </bForm.Group>
+            </div>
+            <Button as="input" type="submit" value="Add Meal"></Button>
+          </Form>
+        </Col>
+      </Row>
     </>
   );
 };
