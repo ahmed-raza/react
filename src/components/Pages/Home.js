@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useRouteLoaderData } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
+import Jumbotron from "../UI/Jumbotron";
 import { getAuthUser } from "../util/auth";
 import UserMeals from "./UserMeals";
 
@@ -8,14 +9,26 @@ const Home = () => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    getAuthUser().then((response) => {
-      setUser(response.data);
-    });
+    if (token) {
+      getAuthUser().then((response) => {
+        setUser(response.data);
+      });
+    }
   }, [token]);
 
   return (
     <>
-      <UserMeals user_id={user && user.id} />
+      {token ? (
+        <UserMeals user_id={user && user.id} />
+      ) : (
+        <Jumbotron heading="Calories Management System">
+          You must login to use this application.
+          <hr className="mb-4" />
+          <Link to="/login" className="btn btn-primary">
+            Login
+          </Link>
+        </Jumbotron>
+      )}
     </>
   );
 };

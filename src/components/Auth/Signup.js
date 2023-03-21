@@ -1,7 +1,8 @@
-import { ErrorResponse, redirect } from "@remix-run/router";
+import { redirect } from "@remix-run/router";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Form, useActionData } from "react-router-dom";
+import { Form as RForm, useActionData } from "react-router-dom";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 
@@ -31,44 +32,50 @@ const Signup = () => {
   }, [data]);
 
   return (
-    <Card title="Signup">
-      {messages ? <Messages messages={messages} /> : undefined}
-      <Form method="post" autoComplete="off">
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={nameChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={emailChangeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={passwordChangeHandler}
-          />
-        </div>
-        <div>
-          <input type="submit" value="Signup" />
-        </div>
-      </Form>
-    </Card>
+    <>
+      <h1>Sign Up</h1>
+      {messages && <Messages messages={messages} />}
+      <Row>
+        <Col lg="4">
+          <RForm method="post" autoComplete="off">
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label htmlFor="name">Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={nameChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label htmlFor="email">Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  id="email"
+                  onChange={emailChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label htmlFor="password">Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={passwordChangeHandler}
+                />
+              </Form.Group>
+            </div>
+            <Button as="input" type="submit" value="Sign Up" />
+          </RForm>
+        </Col>
+      </Row>
+    </>
   );
 };
 

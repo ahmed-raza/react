@@ -8,6 +8,7 @@ const MainNavigation = () => {
   const token = useRouteLoaderData("root");
   const isLoggedIn = token;
   const [user, setUser] = useState();
+  const isAdmin = isLoggedIn && user && user.role === "admin";
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -28,7 +29,7 @@ const MainNavigation = () => {
               <LinkContainer to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
-              {user && user.role !== "user" && (
+              {isAdmin && (
                 <>
                   <LinkContainer to="list-users">
                     <Nav.Link>List Users</Nav.Link>

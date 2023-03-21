@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Form, useActionData } from "react-router-dom";
-import Card from "../UI/Card";
+import { Form as RForm, useActionData } from "react-router-dom";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import Messages from "../UI/Messages";
 
 const Login = () => {
@@ -25,32 +25,39 @@ const Login = () => {
   };
 
   return (
-    <Card title="Login">
+    <>
+      <h1>Login</h1>
       {errors && <Messages messages={errors} />}
-      <Form method="post">
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            onChange={handleEmailInput}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={handlePasswordInput}
-          />
-        </div>
-        <div>
-          <input type="submit" id="submit" value="Login" />
-        </div>
-      </Form>
-    </Card>
+      <Row>
+        <Col lg="4">
+          <RForm method="post">
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  id="email"
+                  onChange={handleEmailInput}
+                />
+              </Form.Group>
+            </div>
+            <div className="mb-3">
+              <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={handlePasswordInput}
+                />
+              </Form.Group>
+            </div>
+            <Button as="input" type="submit" value="Login" />
+          </RForm>
+        </Col>
+      </Row>
+    </>
   );
 };
 
