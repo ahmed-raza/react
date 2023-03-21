@@ -48,11 +48,11 @@ const MainNavigation = () => {
                   <Form action="/logout" method="post">
                     <div className="d-grid">
                       <Button
+                        variant="secondary"
                         as="input"
                         type="submit"
-                        size="sm"
                         value="Logout"
-                      ></Button>
+                      />
                     </div>
                   </Form>
                 </NavDropdown>
