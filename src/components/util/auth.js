@@ -18,6 +18,19 @@ export function checkAuthLoader() {
   return null;
 }
 
+export function isStaffLoader() {
+  const token = getAuthToken();
+  if (token) {
+    getAuthUser().then((response) => {
+      const user = response.data;
+      if (user.role === "user") {
+        return redirect("/access-denied");
+      }
+    });
+  }
+  return null;
+}
+
 export function checkAuthLoaderNegate() {
   const token = getAuthToken();
   if (token) {

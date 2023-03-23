@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 

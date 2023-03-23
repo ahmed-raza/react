@@ -3,27 +3,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form as RForm, useActionData } from "react-router-dom";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import Card from "../UI/Card";
 import Messages from "../UI/Messages";
 
 const Signup = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const [messages, setMessages] = useState();
   const data = useActionData();
-
-  const nameChangeHandler = (event) => {
-    setName(event.target.value);
-  };
-
-  const emailChangeHandler = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const passwordChangeHandler = (event) => {
-    setPassword(event.target.value);
-  };
 
   useEffect(() => {
     if (data !== undefined && (data.data.errors || data.data.message)) {
@@ -41,34 +25,19 @@ const Signup = () => {
             <div className="mb-3">
               <Form.Group>
                 <Form.Label htmlFor="name">Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  id="name"
-                  onChange={nameChangeHandler}
-                />
+                <Form.Control type="text" name="name" id="name" />
               </Form.Group>
             </div>
             <div className="mb-3">
               <Form.Group>
                 <Form.Label htmlFor="email">Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  id="email"
-                  onChange={emailChangeHandler}
-                />
+                <Form.Control type="email" name="email" id="email" />
               </Form.Group>
             </div>
             <div className="mb-3">
               <Form.Group>
                 <Form.Label htmlFor="password">Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  id="password"
-                  onChange={passwordChangeHandler}
-                />
+                <Form.Control type="password" name="password" id="password" />
               </Form.Group>
             </div>
             <Button as="input" type="submit" value="Sign Up" />

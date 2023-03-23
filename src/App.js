@@ -17,15 +17,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   checkAuthLoader,
   checkAuthLoaderNegate,
+  isStaffLoader,
   tokenLoader,
 } from "./components/util/auth";
 import UpdateMeal, { mealUpdateAction } from "./components/Pages/UpdateMeal";
+import AccessDenied from "./components/Pages/AccessDenied";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    // errorElement: <Error />,
+    errorElement: <Error />,
     id: "root",
     loader: tokenLoader,
     children: [
@@ -45,7 +47,7 @@ const router = createBrowserRouter([
       {
         path: "/list-users",
         element: <UsersList />,
-        loader: checkAuthLoader,
+        loader: isStaffLoader,
       },
       {
         path: "/user/:id",
@@ -82,6 +84,7 @@ const router = createBrowserRouter([
         loader: checkAuthLoaderNegate,
       },
       { path: "/logout", action: logoutAction },
+      { path: "/access-denied", element: <AccessDenied /> },
     ],
   },
 ]);

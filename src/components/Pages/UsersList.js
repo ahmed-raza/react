@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Card from "../UI/Card";
+import { Link, useNavigate } from "react-router-dom";
 import Messages from "../UI/Messages";
 import { getAuthToken } from "../util/auth";
 
@@ -11,6 +10,7 @@ const UsersList = () => {
   const [user, setUser] = useState();
   const [messages, setMessages] = useState();
   const token = getAuthToken();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAuthUser();
@@ -28,6 +28,11 @@ const UsersList = () => {
       })
       .then((response) => {
         setUsers(response.data);
+      })
+      .catch(({ response }) => {
+        if (response.status === 403) {
+          return navigate("/access-denied");
+        }
       });
   }
 
