@@ -29,6 +29,10 @@ const UserMeals = ({ user_id, title, add_more }) => {
     setMeals(data);
   };
 
+  const resetFilter = () => {
+    refreshMealsHandler();
+  };
+
   return (
     <>
       {title && <h1>Add Meal</h1>}
@@ -43,7 +47,7 @@ const UserMeals = ({ user_id, title, add_more }) => {
             </Link>
           </Col>
           <Col lg="10">
-            <FilterForm onFilter={handleFilter} />
+            <FilterForm onFilter={handleFilter} onReset={resetFilter} />
           </Col>
         </Row>
       </div>

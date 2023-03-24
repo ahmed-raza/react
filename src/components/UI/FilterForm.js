@@ -34,6 +34,12 @@ const FilterForm = (props) => {
         console.log(response);
       });
   };
+
+  const reset = () => {
+    setName("");
+    props.onReset();
+  };
+
   return (
     <>
       <RForm className={classes.filterform} onSubmit={filterSubmitHandler}>
@@ -43,6 +49,7 @@ const FilterForm = (props) => {
           placeholder="Name"
           size="20"
           onChange={nameChangeHandler}
+          value={name && name}
         />
         <Form.Control
           type="date"
@@ -57,6 +64,9 @@ const FilterForm = (props) => {
           size="20"
         />
         <Button as="input" type="submit" value={`Search`} />
+        <Button variant="warning" onClick={reset}>
+          Reset
+        </Button>
       </RForm>
     </>
   );
